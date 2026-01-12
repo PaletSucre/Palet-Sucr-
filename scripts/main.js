@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (target) target.classList.add('active');
 });
 
-// Retire la recherche sur la page Commander un gÃ¢teau (index.html)
+// Retire la recherche sur la page Commander un gâteau (shop.html)
 document.addEventListener('DOMContentLoaded', () => {
   const path = (location.pathname.split('/').pop() || '').toLowerCase();
-  if (path === 'index.html') {
+  if (path === 'shop.html') {
     const filters = document.querySelector('.section-head .filters');
     if (filters) filters.remove();
   }
@@ -203,8 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const list = drawer.querySelector('.drawer-nav');
   list.innerHTML = '';
-  // Ordre souhaitÃ© pour le menu mobile: Accueil, Shop, Commander, In The Box, Atelier
-  const order = ['home.html', 'shop-materiel.html', 'index.html', 'inthebox.html', 'atelier.html'];
+  // Ordre souhaité pour le menu mobile: Accueil, Commander un gâteau, Shop, In The Box, L'Atelier
+  const order = ['index.html', 'shop.html', 'shop-materiel.html', 'inthebox.html', 'atelier.html'];
   const links = Array.from(sourceNav.querySelectorAll('a'));
   // Ajoute dans l'ordre souhaitÃ© si disponibles
   order.forEach(key => {

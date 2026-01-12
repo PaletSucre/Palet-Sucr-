@@ -22,27 +22,28 @@ body {
   z-index: 50;
   display: block;
   padding: 0 6px !important;
-  \/\* encore plus compact \*\/ backdrop-filter: blur(6px);
+  /* encore plus compact */
+  backdrop-filter: blur(6px);
   overflow: visible;
   /* autorise le dropdown sous la bulle */
 }
 
 /* Bulle compacte avec logo centre et actions laterales */
 .site-header.bubbled {
-  margin: 8px 10px;
-  background: radial-gradient(120% 120% at 10% 0%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-radius: 999px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, .35) inset, 0 2px 10px rgba(0, 0, 0, .25);
-  position: sticky;
-  top: 8px;
-  z-index: 60;
-  min-height: 46px !important;
-  height: 46px !important;
-  display: grid;
-  place-items: center;
+  margin: 8px 10px !important;
+  background: radial-gradient(120% 120% at 10% 0%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .35) inset, 0 2px 10px rgba(0, 0, 0, .25) !important;
+  position: sticky !important;
+  top: 8px !important;
+  z-index: 60 !important;
+  min-height: 52px !important;
+  height: 52px !important;
+  display: grid !important;
+  place-items: center !important;
   /* centre naturellement le logo */
-  position: relative;
+  position: relative !important;
   /* ancre pour la nav en absolu */
 }
 
@@ -122,35 +123,32 @@ body {
 
 /* Bouton panier en mode ferme (icone + badge, sans texte) */
 .site-header .cart-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  border-radius: 50%;
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
   font-size: 0 !important;
   background: transparent !important;
   border: 1px solid transparent !important;
   box-shadow: none !important;
   color: #fff !important;
-  z-index: 3;
+  z-index: 3 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  font-weight: normal !important;
 }
 
-/* On cache l'ancien pseudo-element car on a maintenant un SVG */
-.site-header .cart-btn::before {
-  display: none;
-}
-
+/* Ensure SVG is HIDDEN on mobile - we keep the ::before pseudo-element instead */
 .site-header .cart-btn svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 1.5;
+  display: none !important;
 }
 
 
@@ -211,7 +209,6 @@ body {
 }
 
 /* focus-within rules disabled (replaced by .menu-open) */
-`r`n
 
 /* === Menu mobile via classe .menu-open (pilote par JS) === */
 .site-header.bubbled.menu-open .nav {
@@ -569,36 +566,36 @@ body.menu-drawer-open::before {
   max-width: 420px;
   background:
     radial-gradient(120% 60% at 10% 0%, rgba(255, 79, 179, .10), rgba(180, 61, 255, .06) 40%, rgba(0, 0, 0, 0) 70%),
-    rgba(15, 16, 20, 0.96);
+    rgba(15, 16, 20, 0.98);
   border-right: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 0 32px rgba(0, 0, 0, .55);
-  -webkit-backdrop-filter: blur(8px) saturate(140%);
-  backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   z-index: 10001;
   /* au-dessus de l'overlay */
   padding: calc(12px + env(safe-area-inset-top)) 14px calc(16px + env(safe-area-inset-bottom));
   transform: translateX(-100%);
-  transition: transform .26s ease;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
 
 body.menu-drawer-open .mobile-drawer {
   transform: translateX(0);
+  opacity: 1;
 }
 
 .mobile-drawer .drawer-header {
   position: sticky;
   top: 0;
-  /* cree le contexte pour le centrage absolu */
-  padding: 6px 0 10px;
-  margin-bottom: 12px;
-  padding-right: 44px;
-  /* espace pour le bouton */
-  background: linear-gradient(180deg, rgba(15, 16, 20, 0.96), rgba(15, 16, 20, 0.88) 60%, rgba(15, 16, 20, 0));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(6px) saturate(140%);
-  backdrop-filter: blur(6px) saturate(140%);
+  padding: 12px 0 16px;
+  margin-bottom: 8px;
+  background: linear-gradient(180deg, rgba(15, 16, 20, 0.98), rgba(15, 16, 20, 0.92) 60%, rgba(15, 16, 20, 0));
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
   z-index: 1;
   display: flex;
   align-items: center;
@@ -606,37 +603,34 @@ body.menu-drawer-open .mobile-drawer {
 }
 
 .mobile-drawer .drawer-title {
-  font-weight: 800;
-  opacity: .96;
-  letter-spacing: .2px;
-  font-size: 16px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.95;
+  letter-spacing: 0.5px;
+  font-size: 18px;
   position: relative;
+  color: rgba(255, 255, 255, 0.95);
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.mobile-drawer .drawer-title::before,
+.mobile-drawer .drawer-title::after {
+  content: none !important;
+  display: none !important;
 }
 
 .mobile-drawer .drawer-close {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: 0;
-  color: #fff;
-  font-size: 22px;
-  line-height: 1;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-}
-
-.mobile-drawer .drawer-close:active {
-  transform: scale(.96);
+  display: none !important;
 }
 
 .mobile-drawer .drawer-nav {
   display: grid;
-  gap: 10px;
+  gap: 0;
 }
 
 .mobile-drawer .drawer-nav a {
@@ -644,29 +638,58 @@ body.menu-drawer-open .mobile-drawer {
   align-items: center;
   justify-content: space-between;
   margin: 0;
-  padding: 14px 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 18px 20px;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
   white-space: nowrap;
-  font-weight: 800;
-  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.mobile-drawer .drawer-nav a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #ff4fb3, #b43dff);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-drawer .drawer-nav a:hover::before {
+  opacity: 1;
 }
 
 .mobile-drawer .drawer-nav a::after {
-  content: '???';
-  opacity: .9;
+  content: '→';
+  font-size: 14px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
 }
 
 .mobile-drawer .drawer-nav a:hover {
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, .28);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  padding-left: 28px;
+}
+
+.mobile-drawer .drawer-nav a:hover::after {
+  opacity: 1;
+  transform: translateX(4px);
 }
 
 .mobile-drawer .drawer-nav a:active {
-  transform: translateY(1px);
+  transform: scale(0.98);
 }
 
 
@@ -711,17 +734,49 @@ main {
 
 section,
 .section {
-  padding: 16px;
+  padding: 20px 16px;
+}
+
+/* Shop header on mobile */
+.shop-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.shop-header .display {
+  font-size: clamp(26px, 8vw, 36px);
+  margin: 8px 0 16px 0;
+}
+
+.separator-silver {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  margin: 16px auto;
 }
 
 /* ===== Hero ===== */
 .hero {
   display: grid;
-  gap: 16px;
+  gap: 20px;
   grid-template-columns: 1fr;
   /* 1 colonne sur mobile */
   align-items: start;
-  padding: 16px;
+  padding: 20px 16px;
+  min-height: auto;
+}
+
+.hero.hero-mystere {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+}
+
+.hero.hero-mystere .centered-hero {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Lignes decoratives si presentes */
@@ -731,21 +786,51 @@ section,
 
 .hero-inner {
   display: grid;
-  gap: 12px;
+  gap: 16px;
+  padding: 0;
 }
 
 .display {
   font-family: "Playfair Display", serif;
   font-weight: 700;
-  font-size: clamp(24px, 7vw, 30px);
-  line-height: 1.12;
+  font-size: clamp(28px, 8vw, 38px);
+  line-height: 1.1;
   margin: 0;
+  word-wrap: break-word;
 }
 
 .lead {
   color: #d6d6d6;
   margin: 0;
   font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Hero bubble container for mobile */
+.hero-bubble {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.hero-bubble p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Hero mystere title specific */
+.hero-title-mystere {
+  font-size: clamp(32px, 9vw, 48px) !important;
+  line-height: 1.1 !important;
+}
+
+.italic-gradient {
+  display: inline-block;
 }
 
 .cta-row {
@@ -776,11 +861,22 @@ section,
 .btn {
   min-height: 48px;
   border-radius: 999px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
-  display: inline-grid;
-  place-items: center;
-  padding: 12px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  font-size: 14px;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-mystere {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  padding: 14px 28px;
 }
 
 .btn-primary {
@@ -841,8 +937,19 @@ section,
 .card-body p {
   margin: 0;
   color: #d3d3d3;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.5;
   text-align: center;
+}
+
+/* Shop subtitle mobile */
+.shop-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .price-row {
@@ -1252,4 +1359,107 @@ body.overlay-open .site-header {
   }
 }
 
+/* =============================================
+   MOBILE CART STYLES - Delete Button Positioning
+   ============================================= */
 
+/* Force mobile cart layout */
+#cart-list .cart-item,
+.cart-panel #cart-list .cart-item {
+  position: relative !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  padding: 12px 8px !important;
+  grid-template-columns: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#cart-list .cart-item img,
+.cart-panel #cart-list .cart-item img {
+  width: 60px !important;
+  height: 60px !important;
+  flex-shrink: 0 !important;
+  border-radius: 8px !important;
+}
+
+/* Product info section */
+#cart-list .cart-item>div:first-of-type,
+.cart-panel #cart-list .cart-item>div:first-of-type {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding-right: 36px !important;
+}
+
+#cart-list .cart-item h4,
+.cart-panel #cart-list .cart-item h4 {
+  font-size: 14px !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  padding-right: 0 !important;
+}
+
+#cart-list .cart-item .sub,
+.cart-panel #cart-list .cart-item .sub {
+  font-size: 12px !important;
+  margin: 0 !important;
+  opacity: 0.7 !important;
+}
+
+/* Hide quantity controls */
+#cart-list .cart-item .qty,
+.cart-panel #cart-list .cart-item .qty {
+  display: none !important;
+}
+
+/* Price - full width */
+#cart-list .cart-item strong,
+.cart-panel #cart-list .cart-item strong {
+  width: 100% !important;
+  flex-basis: 100% !important;
+  margin: 8px 0 0 70px !important;
+  font-size: 1.1rem !important;
+  text-align: right !important;
+  order: 10 !important;
+}
+
+/* DELETE BUTTON - Top-right corner with glassmorphism */
+#cart-list .cart-item button[data-action="del"],
+.cart-panel #cart-list .cart-item button[data-action="del"] {
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0.75 !important;
+  transition: all 0.2s ease !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#cart-list .cart-item button[data-action="del"]:active,
+.cart-panel #cart-list .cart-item button[data-action="del"]:active {
+  opacity: 1 !important;
+  transform: scale(0.95) !important;
+  background: rgba(255, 79, 168, 0.15) !important;
+}
+
+#cart-list .cart-item button[data-action="del"]::before,
+.cart-panel #cart-list .cart-item button[data-action="del"]::before {
+  width: 18px !important;
+  height: 18px !important;
+  background-size: 14px 14px !important;
+  opacity: 1 !important;
+}

@@ -67,10 +67,8 @@ function renderCart() {
           <button class="icon-btn" data-action="inc" data-id="${it.id}" data-index="${idx}">+</button>
         </div>
       </div>
-      <div style="display:grid;gap:6px;justify-items:end">
-        <strong>${fmt(Number(it.price || 0) * Number(it.qty || 1))}</strong>
-        <button class="icon-btn" data-action="del" data-id="${it.id}" data-index="${idx}">Supprimer</button>
-      </div>
+      <strong>${fmt(Number(it.price || 0) * Number(it.qty || 1))}</strong>
+      <button class="icon-btn" data-action="del" data-id="${it.id}" data-index="${idx}"></button>
     `;
     list.appendChild(li);
   });
@@ -176,10 +174,8 @@ function showAddModal(item, itemsNow) {
   ov.querySelector('.add-image').src = item.image || '';
   ov.querySelector('.add-name').textContent = item.name || 'Produit';
   ov.querySelector('.add-price').textContent = fmt(Number(item.price || 0));
-  ov.querySelector('.add-qty').textContent = 'Quantite: ' + qtyAdded;
-  ov.querySelector('.add-cartcount').textContent = 'Il y a ' + count + ' article' + (count > 1 ? 's' : '') + ' dans votre panier';
-  ov.querySelector('.add-sub').textContent = fmt(sub);
-  ov.querySelector('.add-total').textContent = fmt(sub);
+  const totalVal = ov.querySelector('.add-total-val');
+  if (totalVal) totalVal.textContent = fmt(sub);
 
   const close = () => ov.classList.remove('open');
   ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
@@ -188,13 +184,7 @@ function showAddModal(item, itemsNow) {
   const viewBtn = ov.querySelector('.add-open-cart');
   if (viewBtn) viewBtn.onclick = () => {
     close();
-    // DÃ©lais minimal pour laisser le DOM se mettre Ã  jour
+    // Délais minimal pour laisser le DOM se mettre à jour
     setTimeout(() => { try { openCart(); } catch { } }, 0);
   };
 }
-
-
-
-
-
-
