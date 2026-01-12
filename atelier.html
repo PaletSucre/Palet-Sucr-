@@ -1,0 +1,162 @@
+﻿<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>L'Atelier - Palet Sucr&eacute;</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 768px)">
+  <link rel="stylesheet" href="theme-glass.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0b0c0f">
+</head>
+
+<body class="transparent-header">
+  <header class="site-header bubbled ps-glass-nav">
+    <a class="brand" href="home.html">
+      <img class="brand-mark" src="assets/logo-ps.png" alt="Palet Sucr&eacute;" />
+      <span class="brand-name">Palet Sucr&eacute;</span>
+    </a>
+    <nav class="nav" id="site-nav">
+      <a href="home.html">Accueil</a>
+      <a href="shop.html">Commander un g&acirc;teau</a>
+      <a href="shop-materiel.html">Shop</a>
+      <a href="inthebox.html">In The Box</a>
+      <a href="atelier.html" class="active">L'Atelier</a>
+
+    </nav>
+    <button id="open-cart" class="cart-btn" aria-label="Panier">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main>
+    <!-- Scroll Track: Shortened for snappy access (150vh) -->
+    <div class="atelier-scroll-track" style="height: 150vh;">
+      <section class="atelier-hero sticky-hero">
+        <img src="assets/atelier-hero.png" alt="L'Atelier Palet Sucré" class="hero-bg">
+        <div class="atelier-hero-content">
+          <div class="hero-text-group reveal-on-scroll">
+            <span class="shop-subtitle">Le Studio de Création</span>
+            <h1 class="display">L'Atelier</h1>
+            <div class="separator-silver"></div>
+          </div>
+
+          <div class="atelier-manifesto reveal-on-scroll delay">
+            <p class="lead">Palet Sucré est un atelier de pâtisserie <strong>noir & néon</strong> où chaque pièce est
+              travaillée comme un objet de studio.</p>
+            <p>Le masque, symbole de la maison, rappelle l’importance du geste caché derrière chaque finition : anonymat
+              de l’artisan, pureté de la forme, et mystère qui sublime la dégustation.</p>
+          </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="scroll-hint">
+          <span>Scrollez pour découvrir</span>
+          <div class="line"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Social Network Hub (3 Bubbles) -->
+    <div class="social-hub">
+
+      <!-- Instagram Bubble -->
+      <section class="network-section insta-section reveal">
+        <header class="network-header">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <h2>Instagram</h2>
+          <a href="#" target="_blank" class="follow-link">@paletsucre</a>
+        </header>
+        <div id="insta-grid" class="network-grid mobile-scroll"></div>
+      </section>
+
+      <!-- YouTube Bubble -->
+      <section class="network-section youtube-section reveal">
+        <header class="network-header">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+          <h2>YouTube</h2>
+          <a href="#" target="_blank" class="follow-link">Palet Sucré Channel</a>
+        </header>
+        <div id="youtube-grid" class="network-scroll"></div>
+      </section>
+
+      <!-- TikTok Bubble -->
+      <section class="network-section tiktok-section reveal">
+        <header class="network-header">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+          </svg>
+          <h2>TikTok</h2>
+          <a href="#" target="_blank" class="follow-link">@paletsucre_officiel</a>
+        </header>
+        <div id="tiktok-grid" class="network-scroll vertical"></div>
+      </section>
+
+    </div>
+
+    <!-- Donn&eacute;es des posts (modifie/ajoute ici) -->
+    <script id="atelier-data" type="application/json">
+    [
+      {"type":"image","title":"Raffaello Framboise","src":"assets/raffaello.jpg"},
+      {"type":"image","title":"Pistache Rubis","src":"assets/pistache.jpg"},
+      {"type":"image","title":"Chocolat Obscura","src":"assets/choco.jpg"},
+      {"type":"image","title":"Citron Silk","src":"assets/citron.jpg"},
+      {"type":"youtube","title":"Montage d'un entremets","id":"dQw4w9WgXcQ"},
+      {"type":"tiktok","title":"Pochage en acc&eacute;l&eacute;r&eacute;","id":"722839139488"},
+      {"type":"instagram","title":"Dressing lisse miroir","id":"CwXabc12345"}
+    ]
+    </script>
+    </script>
+    <script src="scripts/atelier.js"></script>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-signature-brand">Palet Sucré</div>
+    <nav class="footer-nav">
+      <a href="#">Mentions légales</a>
+      <a href="#">CGV</a>
+      <a href="#">Contact</a>
+    </nav>
+    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">&copy; <span id="year"></span> Palet Sucré — Paris.</p>
+  </footer>
+
+  <div id="cart-overlay" class="cart-overlay" aria-hidden="true">
+    <aside class="cart-panel" role="dialog" aria-labelledby="cart-title">
+      <header class="cart-header">
+        <h2 id="cart-title">Votre panier</h2>
+        <button id="cart-close" class="icon-btn" aria-label="Fermer">&times;</button>
+      </header>
+      <ul id="cart-list" class="cart-list"></ul>
+      <footer class="cart-footer">
+        <div class="cart-total">
+          <strong>Total : <span id="cart-total">0,00 &euro;</span></strong>
+        </div>
+        <a class="btn btn-primary w-full" href="checkout.html">Finaliser ma commande</a>
+      </footer>
+    </aside>
+  </div>
+
+  <script src="scripts/cart.js"></script>
+  <script src="scripts/atelier.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>

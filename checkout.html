@@ -1,0 +1,181 @@
+﻿<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Finaliser ma commande &mdash; Palet Sucr&eacute;</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 768px)">
+  <link rel="stylesheet" href="theme-glass.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0b0c0f">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header bubbled ps-glass-nav">
+    <a class="brand" href="home.html">
+      <img class="brand-mark" src="assets/logo-ps.png" alt="Palet Sucr&eacute;" />
+      <span class="brand-name">Palet Sucr&eacute;</span>
+    </a>
+    <nav class="nav" id="site-nav">
+      <a href="home.html">Accueil</a>
+      <a href="shop.html">Commander un g&acirc;teau</a>
+      <a href="shop-materiel.html">Shop</a>
+      <a href="inthebox.html">In The Box</a>
+      <a href="atelier.html">L'Atelier</a>
+
+    </nav>
+    <button id="open-cart" class="cart-btn" aria-label="Panier">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main class="section">
+    <header class="shop-header">
+      <span class="shop-subtitle">Finalisation</span>
+      <h1 class="display">Votre Commande</h1>
+      <div class="separator-silver"></div>
+    </header>
+    <!-- Stepper -->
+    <ol class="ck-steps" aria-label="Progression">
+      <li class="active" data-step="1">Informations</li>
+      <li data-step="2">Adresse</li>
+      <li data-step="3">Paiement</li>
+      <li data-step="4">Confirmation</li>
+    </ol>
+
+    <div class="checkout-grid">
+      <!-- Colonne formulaire &eacute;tapes -->
+      <section class="ck-flow">
+        <!-- &Eacute;tape 1 -->
+        <form id="step-1" class="ck-card step active" novalidate>
+          <h2>1. Informations personnelles</h2>
+          <div class="grid form-grid">
+            <label>Pr&eacute;nom
+              <input class="input" name="firstname" required placeholder="Votre pr&eacute;nom">
+            </label>
+            <label>Nom
+              <input class="input" name="lastname" required placeholder="Votre nom">
+            </label>
+            <label>Email
+              <input class="input" name="email" type="email" required placeholder="vous@mail.com">
+            </label>
+            <label>T&eacute;l&eacute;phone
+              <input class="input" name="phone" type="tel" required placeholder="06&#8226;&#8226;">
+            </label>
+          </div>
+          <div class="ck-actions">
+            <button class="btn btn-primary" data-next>Continuer</button>
+          </div>
+        </form>
+
+        <!-- &Eacute;tape 2 -->
+        <form id="step-2" class="ck-card step" novalidate>
+          <h2>2. Livraison ou retrait</h2>
+          <div class="ck-choice">
+            <label><input type="radio" name="mode" value="retrait" checked> Retrait &agrave; l'atelier</label>
+            <label><input type="radio" name="mode" value="livraison"> Livraison &Icirc;le-de-France</label>
+          </div>
+
+          <div id="addr" class="grid form-grid hidden">
+            <label>Adresse
+              <input class="input" name="address" placeholder="N&deg;, rue...">
+            </label>
+            <label>Compl&eacute;ment
+              <input class="input" name="address2" placeholder="B&acirc;timent, &eacute;tage... (optionnel)">
+            </label>
+            <label>Code postal
+              <input class="input" name="zip" placeholder="75000">
+            </label>
+            <label>Ville
+              <input class="input" name="city" placeholder="Paris">
+            </label>
+          </div>
+
+          <div class="ck-actions">
+            <button class="btn btn-ghost" data-prev>Retour</button>
+            <button class="btn btn-primary" data-next>Continuer</button>
+          </div>
+        </form>
+
+        <!-- &Eacute;tape 3 -->
+        <form id="step-3" class="ck-card step" novalidate>
+          <h2>3. Paiement</h2>
+          <p class="sub">D&eacute;mo front-end &mdash; int&eacute;gration Stripe/PayPal possible ensuite.</p>
+          <div class="grid form-grid">
+            <label>Nom sur la carte
+              <input class="input" name="ccname" required placeholder="Ex: SOFIANE BENNY">
+            </label>
+            <label>Num&eacute;ro de carte
+              <input class="input" name="ccnum" required placeholder="4242 4242 4242 4242" inputmode="numeric">
+            </label>
+            <label>Expiration
+              <input class="input" name="ccexp" required placeholder="MM/AA">
+            </label>
+            <label>CVC
+              <input class="input" name="cccvc" required placeholder="123" inputmode="numeric">
+            </label>
+          </div>
+          <label class="ck-terms">
+            <input type="checkbox" id="terms" required>
+            <span>J'accepte les CGV et la politique de confidentialit&eacute;.</span>
+          </label>
+          <div class="ck-actions">
+            <button class="btn btn-ghost" data-prev>Retour</button>
+            <button class="btn btn-primary" data-next>Valider le paiement</button>
+          </div>
+          <p id="ck-msg" class="ck-msg" role="status"></p>
+        </form>
+
+        <!-- &Eacute;tape 4 -->
+        <section id="step-4" class="ck-card step">
+          <h2>4. Confirmation</h2>
+          <p>Merci ! Votre commande a bien &eacute;t&eacute; enregistr&eacute;e (d&eacute;mo).</p>
+          <a class="btn btn-primary" href="home.html">Retour &agrave; l'accueil</a>
+        </section>
+      </section>
+
+      <!-- Colonne r&eacute;cap panier -->
+      <aside class="ck-summary ck-card">
+        <h3>R&eacute;capitulatif</h3>
+        <ul id="ck-list" class="ck-list"></ul>
+        <div class="ck-total">
+          <div><span>Sous-total</span><strong id="ck-sub">0,00&nbsp;&euro;</strong></div>
+          <div><span>Livraison</span><strong id="ck-ship">Gratuite</strong></div>
+          <div class="ck-total-line"><span>Total TTC</span><strong id="ck-total">0,00&nbsp;&euro;</strong></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-signature-brand">Palet Sucré</div>
+    <nav class="footer-nav">
+      <a href="#">Mentions légales</a>
+      <a href="#">CGV</a>
+      <a href="#">Contact</a>
+    </nav>
+    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">&copy; <span id="year"></span> Palet Sucré — Paris.</p>
+  </footer>
+
+  <script src="scripts/cart.js"></script>
+  <script src="scripts/checkout.js"></script>
+  <script src="scripts/main.js"></script>
+
+  <!-- Stripe & PayPal SDKs -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
+</body>
+
+</html>

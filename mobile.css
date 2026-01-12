@@ -1,0 +1,1255 @@
+﻿/* ===== Reset & base mobile ===== */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font: 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ===== Header / Brand / Nav ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: block;
+  padding: 0 6px !important;
+  \/\* encore plus compact \*\/ backdrop-filter: blur(6px);
+  overflow: visible;
+  /* autorise le dropdown sous la bulle */
+}
+
+/* Bulle compacte avec logo centre et actions laterales */
+.site-header.bubbled {
+  margin: 8px 10px;
+  background: radial-gradient(120% 120% at 10% 0%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .35) inset, 0 2px 10px rgba(0, 0, 0, .25);
+  position: sticky;
+  top: 8px;
+  z-index: 60;
+  min-height: 46px !important;
+  height: 46px !important;
+  display: grid;
+  place-items: center;
+  /* centre naturellement le logo */
+  position: relative;
+  /* ancre pour la nav en absolu */
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Logo en taille d'origine (version mobile) */
+.site-header.bubbled .brand-mark {
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  max-height: 42px;
+  /* s'ajuste a la bulle reduite */
+  border-radius: 10px;
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 14px;
+  display: none;
+}
+
+/* Centre le logo dans la bulle */
+.site-header .brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  line-height: 0;
+}
+
+.site-header.bubbled .brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  height: auto;
+  display: block;
+}
+
+/* Ruban d??Tonglets scrollable */
+/* Navigation mobile repliee (hamburger) */
+.site-header .nav {
+  position: absolute;
+  inset: 0;
+  /* occupe toute la bulle */
+  display: block;
+  padding: 6px 54px 6px 52px;
+  /* espace pour cart a droite + burger a gauche */
+  overflow: visible;
+  z-index: 3;
+  /* au-dessus pour clics */
+}
+
+.site-header .nav {
+  pointer-events: none;
+}
+
+.site-header .nav a:first-child,
+.site-header .cart-btn {
+  pointer-events: auto;
+}
+
+/* Bouton panier en mode ferme (icone + badge, sans texte) */
+.site-header .cart-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 0 !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  z-index: 3;
+}
+
+/* On cache l'ancien pseudo-element car on a maintenant un SVG */
+.site-header .cart-btn::before {
+  display: none;
+}
+
+.site-header .cart-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.5;
+}
+
+
+
+/* Premier lien = declencheur hamburger (transforme visuellement) */
+.site-header .nav a:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #fff;
+  background: transparent !important;
+  border: 0 !important;
+  font-size: 0;
+  /* cache le texte "Accueil" quand replie */
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+
+.site-header .nav a:first-child.active {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-header .nav a:first-child::before {
+  content: "";
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 -6px 0 #ffffff, 0 6px 0 #ffffff;
+  /* 3 points verticaux */
+}
+
+/* Cache les autres liens tant que non ouvert (sauf panier) */
+/* Cache tous les liens sauf le 1er (burger). On laisse le bouton panier. */
+.site-header .nav>a {
+  display: none;
+}
+
+.site-header .nav>a:first-child {
+  display: inline-flex;
+}
+
+/* Nettoie les styles actifs desktop sur mobile (fond rose etc.) */
+.site-header .nav a {
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* focus-within rules disabled (replaced by .menu-open) */
+`r`n
+
+/* === Menu mobile via classe .menu-open (pilote par JS) === */
+.site-header.bubbled.menu-open .nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: auto;
+  width: min(84vw, 420px);
+  padding: 16px 12px calc(16px + env(safe-area-inset-bottom));
+  background: rgba(15, 16, 20, 0.98);
+  border-right: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .55);
+  z-index: 10000;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  pointer-events: auto;
+  transform: translateX(-8px);
+  opacity: 0;
+  transition: transform .22s ease, opacity .22s ease;
+}
+
+.site-header.bubbled.menu-open .nav {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.site-header.bubbled.menu-open .nav>a {
+  display: block;
+  /* afficher tous les liens par defaut */
+  margin: 6px 2px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: transparent !important;
+  border: 0 !important;
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+.site-header.bubbled.menu-open .nav>a:first-child {
+  display: none;
+}
+
+.site-header.bubbled.menu-open .nav>.cart-btn {
+  position: fixed;
+  right: 16px;
+  top: 18px;
+  transform: none;
+  z-index: 120;
+}
+
+/* Overlay plein ecran quand le drawer est ouvert */
+body.menu-drawer-open {
+  overflow: hidden;
+}
+
+body.menu-drawer-open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, .55);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+/* ===== Fiche produit (mobile) ===== */
+#product-overlay {
+  display: none;
+}
+
+#product-overlay.open {
+  display: block;
+}
+
+#product-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  background: rgba(0, 0, 0, .55);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.product-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  transform: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 78dvh;
+  max-height: 92dvh;
+  background: #0b0c0f;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, .10);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+}
+
+.product-panel .product-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: transparent;
+  border: 0 !important;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.product-panel .product-body {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: auto;
+  grid-template-columns: 1fr !important;
+}
+
+.product-panel .product-media img {
+  width: 100%;
+  height: clamp(200px, 42vh, 320px);
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.product-panel .product-info {
+  padding: 12px 16px 16px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.product-panel .product-info h2 {
+  margin: 0;
+  font-size: 20px;
+  font-family: "Playfair Display", serif;
+}
+
+.product-panel .product-info .sub {
+  margin: 0;
+  color: #cfcfd8;
+  font-size: 14px;
+}
+
+.product-panel .servings {
+  display: grid;
+  gap: 6px;
+}
+
+.product-panel .price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.product-panel #product-add {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.product-panel select {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #12131a;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+/* ===== Popup ajout au panier (mobile) ===== */
+.add-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10003;
+  display: none;
+}
+
+.add-modal-overlay.open {
+  display: block;
+}
+
+.add-modal {
+  position: fixed;
+  left: 50%;
+  top: calc(10px + env(safe-area-inset-top));
+  width: min(90vw, 360px);
+  background: #101218;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+  overflow: hidden;
+  transform: translate(-50%, -8px);
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.add-modal-overlay.open .add-modal {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.add-head {
+  padding: 8px 12px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #101014;
+  background: linear-gradient(135deg, #ff4fb3, #b43dff);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-head .check {
+  background: #fff;
+  color: #0b0c0f;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 11px;
+}
+
+.add-modal .add-close {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 18px;
+}
+
+.add-modal .add-body {
+  display: grid;
+  grid-template-columns: 1fr !important;
+  grid-auto-flow: row;
+  padding: 10px 12px;
+  gap: 10px;
+}
+
+.add-modal .add-sep {
+  display: inline-flex !important;
+}
+
+.add-modal .add-left {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 10px;
+  align-items: start;
+  grid-column: 1 / -1;
+}
+
+.add-modal .add-left img {
+  width: 56px !important;
+  height: 56px !important;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.add-info h4 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+.add-info .sub,
+.add-body .muted {
+  opacity: .85;
+  font-size: 12px;
+}
+
+.add-modal .add-right {
+  display: grid;
+  gap: 10px;
+  font-size: 13px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  padding-top: 8px;
+  grid-column: 1 / -1;
+}
+
+.add-lines {
+  display: grid;
+  gap: 6px;
+}
+
+.add-modal .add-lines .line {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.add-modal .add-lines .line strong {
+  font-size: 14px;
+}
+
+.add-modal .add-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.add-modal .add-actions .btn {
+  min-height: 38px;
+  font-size: 14px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* Calage des lignes texte/prix pour eviter les chevauchements */
+.add-modal .add-lines .line span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.add-modal .add-lines .line strong {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+@media (max-width: 400px) {
+  .add-modal {
+    width: min(92vw, 340px);
+  }
+}
+
+@media (max-width: 360px) {
+  .add-modal {
+    width: 92vw;
+  }
+
+  .add-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Drawer mobile dedie (independant du header) ===== */
+.mobile-drawer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: auto;
+  width: min(84vw, 420px);
+  max-width: 420px;
+  background:
+    radial-gradient(120% 60% at 10% 0%, rgba(255, 79, 179, .10), rgba(180, 61, 255, .06) 40%, rgba(0, 0, 0, 0) 70%),
+    rgba(15, 16, 20, 0.96);
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 32px rgba(0, 0, 0, .55);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(140%);
+  z-index: 10001;
+  /* au-dessus de l'overlay */
+  padding: calc(12px + env(safe-area-inset-top)) 14px calc(16px + env(safe-area-inset-bottom));
+  transform: translateX(-100%);
+  transition: transform .26s ease;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+body.menu-drawer-open .mobile-drawer {
+  transform: translateX(0);
+}
+
+.mobile-drawer .drawer-header {
+  position: sticky;
+  top: 0;
+  /* cree le contexte pour le centrage absolu */
+  padding: 6px 0 10px;
+  margin-bottom: 12px;
+  padding-right: 44px;
+  /* espace pour le bouton */
+  background: linear-gradient(180deg, rgba(15, 16, 20, 0.96), rgba(15, 16, 20, 0.88) 60%, rgba(15, 16, 20, 0));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(6px) saturate(140%);
+  backdrop-filter: blur(6px) saturate(140%);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-drawer .drawer-title {
+  font-weight: 800;
+  opacity: .96;
+  letter-spacing: .2px;
+  font-size: 16px;
+  position: relative;
+}
+
+.mobile-drawer .drawer-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.mobile-drawer .drawer-close:active {
+  transform: scale(.96);
+}
+
+.mobile-drawer .drawer-nav {
+  display: grid;
+  gap: 10px;
+}
+
+.mobile-drawer .drawer-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 14px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+
+.mobile-drawer .drawer-nav a::after {
+  content: '???';
+  opacity: .9;
+}
+
+.mobile-drawer .drawer-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .28);
+}
+
+.mobile-drawer .drawer-nav a:active {
+  transform: translateY(1px);
+}
+
+
+/* Panier bouton */
+.cart-btn {
+  min-height: 40px;
+  border-radius: 999px;
+  border: 0;
+  padding: 8px 12px;
+  font-weight: 700;
+}
+
+.badge {
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #ec6f91;
+  color: #0c0c0c;
+  font-weight: 800;
+}
+
+/* Badge compacte a droite de l'icone panier (mobile) */
+.site-header .cart-btn .badge {
+  margin-left: 2px;
+  padding: 0 5px;
+  height: 16px;
+  min-width: 16px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1;
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, .9);
+}
+
+/* ===== Sections / Layout ===== */
+main {
+  display: block;
+}
+
+section,
+.section {
+  padding: 16px;
+}
+
+/* ===== Hero ===== */
+.hero {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+  /* 1 colonne sur mobile */
+  align-items: start;
+  padding: 16px;
+}
+
+/* Lignes decoratives si presentes */
+.hero-line {
+  display: none;
+}
+
+.hero-inner {
+  display: grid;
+  gap: 12px;
+}
+
+.display {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(24px, 7vw, 30px);
+  line-height: 1.12;
+  margin: 0;
+}
+
+.lead {
+  color: #d6d6d6;
+  margin: 0;
+  font-size: 15px;
+}
+
+.cta-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 380px) {
+  .cta-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hero visuel sous le texte, pleine largeur */
+.hero-art {
+  order: 2;
+}
+
+.hero-art img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Boutons */
+.btn {
+  min-height: 48px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-align: center;
+  display: inline-grid;
+  place-items: center;
+  padding: 12px 16px;
+}
+
+.btn-primary {
+  background: #ec6f91;
+  color: #0c0c0c;
+  border: 0;
+}
+
+.btn-ghost {
+  background: transparent !important;
+  color: #fff;
+  border: 0 !important;
+}
+
+/* ===== Cartes / Grilles ===== */
+.grid.cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr !important;
+  /* 1 colonne */
+  max-width: 640px;
+  /* centrage confortable sur mobile */
+  margin-inline: auto;
+  /* centre la grille */
+  padding-inline: 8px;
+  /* petite marge laterale */
+}
+
+.card {
+  display: grid;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Images de catalogue: meme hauteur, centrees et recadrees proprement */
+.card>img {
+  width: 100%;
+  height: clamp(180px, 45vw, 260px);
+  object-fit: cover;
+  display: block;
+}
+
+.card-body {
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.card-body h3 {
+  margin: 0;
+  font-size: 17px;
+  text-align: center;
+}
+
+.card-body p {
+  margin: 0;
+  color: #d3d3d3;
+  font-size: 14px;
+  text-align: center;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-weight: 800;
+  font-size: 16px;
+}
+
+/* Specifique au shop.html (#shop-grid) si present */
+#shop-grid {
+  max-width: 640px;
+  margin-inline: auto;
+  padding-inline: 8px;
+}
+
+#shop-grid .card-body h3 {
+  font-size: 18px;
+}
+
+#shop-grid .price-row {
+  justify-content: space-between;
+}
+
+/* Boutons compacts dans les cartes */
+.btn-small {
+  min-height: 44px;
+  padding: 10px 14px;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  padding: 20px 16px;
+  text-align: center;
+  color: #cccccc;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  color: #eaeaea;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: .9;
+}
+
+/* ===== Panier (overlay) ===== */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+}
+
+.cart-panel {
+  position: fixed;
+  inset: auto 0 0 0;
+  height: 75dvh;
+  max-height: 90dvh;
+  background: #0b0c0f;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+.icon-btn {
+  font-size: 28px;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  color: #fff;
+}
+
+.cart-list {
+  margin: 0;
+  padding: 0 16px;
+  list-style: none;
+  overflow: auto;
+}
+
+.cart-footer {
+  padding: 12px 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.w-full {
+  width: 100%;
+  display: inline-grid;
+  place-items: center;
+  min-height: 48px;
+  border-radius: 999px;
+}
+
+/* ===== Typo titres sections ===== */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-inline: 4px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.section-head .link {
+  text-decoration: none;
+  color: #fff;
+  opacity: .9;
+}
+
+/* ===== Images & medias ===== */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== Petits ecrans tres etroits ===== */
+@media (max-width: 340px) {
+  .brand-name {
+    display: none;
+  }
+
+  .price-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}
+
+/* Overlay panier : toujours au-dessus du header */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  /* <-- cle : au-dessus du header (qui est a 50) */
+  background: rgba(0, 0, 0, .65);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  display: none;
+  /* masque par defaut */
+}
+
+/* Afficher l??Toverlay quand aria-hidden="false" */
+.cart-overlay[aria-hidden="false"] {
+  display: block;
+}
+
+/* Panneau en bas (bottom sheet) */
+.cart-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 75dvh;
+  max-height: 90dvh;
+  background: #0b0c0f;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+
+/* Quand l??Toverlay est ouvert : empecher le scroll de la page derriere */
+body.overlay-open {
+  overflow: hidden;
+}
+
+/* Optionnel : on desactive les clics du header quand overlay ouvert (securite) */
+body.overlay-open .site-header {
+  pointer-events: none;
+}
+
+/* ===== Cart (mobile fine-tuning) ===== */
+/* Items compacts et lisibles sur mobile */
+.cart-list {
+  padding: 8px 12px !important;
+  display: grid;
+  gap: 10px;
+}
+
+.cart-item {
+  display: grid !important;
+  grid-template-columns: 56px 1fr auto !important;
+  gap: 10px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.cart-item img {
+  width: 56px !important;
+  height: 56px !important;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cart-item h4 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.cart-item .sub {
+  font-size: 12px;
+  opacity: .85;
+}
+
+.cart-item .qty {
+  gap: 8px !important;
+}
+
+.cart-item .qty .icon-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+
+.cart-item>div:last-child {
+  justify-items: end;
+}
+
+.cart-item strong {
+  font-size: 14px;
+}
+
+.cart-item .icon-btn[data-action="del"],
+.cart-item .icon-btn[data-action="remove"] {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+/* En-tete et pied du panneau resserres */
+.cart-header {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cart-footer {
+  padding: 12px 16px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cart-footer .btn {
+  min-height: 46px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Force no-bubble trigger on all mobile pages */
+.site-header.bubbled .nav a:first-child,
+.site-header.bubbled .nav a:first-child.active {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Hide desktop bubble indicator and any bubble styles for trigger on mobile */
+.site-header.bubbled .nav .bubble-indicator {
+  display: inline-flex !important;
+}
+
+.site-header.bubbled .nav a.bubble {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-header.bubbled .nav a.bubble:first-child {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Force plain three-dots trigger on Accueil too */
+.nav-pill .nav a:first-child,
+.nav-pill .nav a:first-child.active,
+.site-header.bubbled .nav a.bubble:first-child {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-header.bubbled .nav .bubble-indicator {
+  display: inline-flex !important;
+}
+
+/* Nav-pill anchors on mobile: no bubbles anywhere */
+.nav-pill .nav a {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Ensure three-dots trigger has no bubble on home (nav-pill) */
+@media (max-width: 768px) {
+
+  .nav-pill .nav a:first-child,
+  .nav-pill .nav a:first-child.active,
+  .nav-pill .nav a.bubble:first-child {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* draw the three dots consistently on home as well */
+  .nav-pill .nav a:first-child {
+    font-size: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+  }
+
+  .nav-pill .nav a:first-child::before {
+    content: "";
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 -6px 0 #ffffff, 0 6px 0 #ffffff;
+  }
+}
+
+/* Final override: force three-dots trigger without bubble on all mobile pages (Accueil inclus) */
+@media (max-width: 768px) {
+
+  .site-header.bubbled .nav a:first-child,
+  .site-header.bubbled .nav a:first-child.active,
+  .site-header.bubbled .nav a.bubble:first-child,
+  .nav-pill .nav a:first-child,
+  .nav-pill .nav a:first-child.active,
+  .nav-pill .nav a.bubble:first-child {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+

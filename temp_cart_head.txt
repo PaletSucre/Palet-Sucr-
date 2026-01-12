@@ -1,0 +1,88 @@
+﻿const CART_KEY = 'PS_CART_V2';
+const $ = (sel, root=document) => root.querySelector(sel);
+
+function readCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; } }
+function writeCart(items){
+  localStorage.setItem(CART_KEY, JSON.stringify(items));
+  updateBadge(items);
+  try { window.dispatchEvent(new CustomEvent('cart:update', { detail: items })); } catch {}
+}
+function fmt(n){
+  try{
+    return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(n);
+  }catch{
+    return n.toFixed(2).replace('.', ',') + ' EUR';
+  }
+}
+function total(items){ return items.reduce((s,x)=> s + x.price * x.qty, 0); }
+
+function addItem(item){
+  const cart = readCart();
+  const i = cart.findIndex(x => x.id === item.id);
+  if(i >= 0) cart[i].qty += (item.qty || 1);
+  else cart.push({...item, qty: item.qty || 1});
+  writeCart(cart); renderCart();
+}
+function removeItem(id){ writeCart(readCart().filter(x => x.id !== id)); renderCart(); }
+function changeQty(id, d){
+  const cart = readCart();
+  const it = cart.find(x => x.id === id); if(!it) return;
+  it.qty = Math.max(1, it.qty + d); writeCart(cart); renderCart();
+}
+function updateBadge(items = readCart()){
+  const el = $('#cart-count'); if(el) el.textContent = items.reduce((s,x)=> s + x.qty, 0);
+}
+
+function renderCart(){
+  const list = $('#cart-list'); const totalEl = $('#cart-total');
+  if(!list || !totalEl) return;
+  const items = readCart();
+  list.innerHTML = '';
+  items.forEach(it=>{
+    const li = document.createElement('li');
+    li.className = 'cart-item';
+    li.innerHTML = `
+      <img src="${it.image}" alt="">
+      <div>
+        <h4>${it.name}</h4>
+        <div class="sub">${fmt(it.price)} / u.</div>
+        <div class="qty">
+          <button class="icon-btn" data-action="dec" data-id="${it.id}">-</button>
+          <span>${it.qty}</span>
+          <button class="icon-btn" data-action="inc" data-id="${it.id}">+</button>
+        </div>
+      </div>
+      <div style="display:grid;gap:6px;justify-items:end">
+        <strong>${fmt(it.price * it.qty)}</strong>
+        <button class="icon-btn" data-action="del" data-id="${it.id}">Supprimer</button>
+      </div>
+    `;
+    list.appendChild(li);
+  });
+  totalEl.textContent = fmt(total(items)||0);
+}
+
+function openCart(){ document.getElementById('cart-overlay')?.classList.add('open'); renderCart(); }
+function closeCart(){ document.getElementById('cart-overlay')?.classList.remove('open'); }
+
+document.addEventListener('click', (e)=>{
+  const t = e.target;
+  if(!(t instanceof HTMLElement)) return;
+  if(t.matches('#open-cart')) openCart();
+  if(t.matches('#cart-close') || t.id === 'cart-overlay') closeCart();
+
+  if(t.matches('.add-to-cart')){
+    const b = t;
+    const qty = Number(b.dataset.qty || '1');
+    addItem({ id:b.dataset.id, name:b.dataset.name, price:Number(b.dataset.price), image:b.dataset.image, qty: qty });
+  }
+  if(t.matches('[data-action="inc"]')) changeQty(t.dataset.id, +1);
+  if(t.matches('[data-action="dec"]')) changeQty(t.dataset.id, -1);
+  if(t.matches('[data-action="del"]')) removeItem(t.dataset.id);
+  if(t.matches('#clear-cart')) { writeCart([]); renderCart(); }
+  
+});
+
+document.addEventListener('DOMContentLoaded', ()=> updateBadge());
+
+

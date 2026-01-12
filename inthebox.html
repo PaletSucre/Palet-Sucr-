@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>In The Box &mdash; Palet Sucr&eacute;</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 768px)">
+  <link rel="stylesheet" href="theme-glass.css">
+  <meta name="theme-color" content="#0b0c0f">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+
+<body class="transparent-header">
+  <!-- ===== Header commun ===== -->
+  <header class="site-header bubbled ps-glass-nav">
+    <a class="brand" href="home.html">
+      <img class="brand-mark" src="assets/logo-ps.png" alt="Palet Sucr&eacute;" />
+      <span class="brand-name">Palet Sucr&eacute;</span>
+    </a>
+
+    <nav class="nav" id="site-nav">
+      <a href="home.html">Accueil</a>
+      <a href="shop.html">Commander un g&acirc;teau</a>
+      <a href="shop-materiel.html">Shop</a>
+      <a href="inthebox.html" class="active">In The Box</a>
+      <a href="atelier.html">L'Atelier</a>
+
+    </nav>
+    <button id="open-cart" class="cart-btn" aria-label="Panier">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ===== Contenu principal ===== -->
+  <main>
+    <!-- Scroll Track for ITB -->
+    <!-- Scroll Track for ITB (tuned to 145vh) -->
+    <!-- Scroll Track for ITB (tuned to 250vh for distinct notches) -->
+    <!-- Scroll Track for ITB (tuned to 150vh for exact L'Atelier match) -->
+    <div class="atelier-scroll-track" style="height: 150vh;">
+      <section class="atelier-hero sticky-hero">
+        <img src="assets/in-the-box-new.jpg" alt="In The Box Experience" class="hero-bg">
+        <!-- Reverted to standard Flex layout (same as L'Atelier) -->
+        <div class="atelier-hero-content">
+          <!-- Glass Card -->
+          <div class="hero-glass-card reveal-on-scroll">
+            <span class="shop-subtitle">La Cabine</span>
+            <h1 class="display">In The Box</h1>
+            <div class="separator-silver"></div>
+          </div>
+
+          <!-- Concept Text (manifesto) - Appears on scroll - Centered by Grid -->
+          <!-- ADDED: reveal-on-scroll class to ensure opacity starts at 0 -->
+          <!-- Negative margin to pull text up closer to title as requested -->
+          <div class="atelier-manifesto reveal-on-scroll" style="margin-top: -40px;">
+            <p>Seul ou à plusieurs, entrez dans la lumière. Une séance photo spontanée, fun et élégante où chacun révèle
+              sa personnalité. Repartez avec votre tirage et un souvenir impérissable.</p>
+          </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="scroll-hint">
+          <span>Scrollez pour découvrir</span>
+          <div class="line"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Split Feature Section -->
+    <section class="feature-split" style="position: relative; z-index: 10; background: transparent;">
+      <div class="feature-media">
+        <img src="assets/in-the-box-new.jpg" alt="Expérience In The Box">
+      </div>
+      <div class="feature-text">
+        <h2>Une expérience immersive</h2>
+        <p>
+          Imaginez une cabine photo transformée en espace gourmand : vos invités décorent un cupcake, prennent la pose,
+          et repartent avec une photo imprimée instantanément.
+        </p>
+        <ul class="bullets" style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <span style="color:var(--ps-pink);">✦</span> Impression 10×15 cm immédiate
+          </li>
+          <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <span style="color:var(--ps-pink);">✦</span> Décoration de cupcake personnalisée
+          </li>
+          <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <span style="color:var(--ps-pink);">✦</span> Lumières et ambiance néon
+          </li>
+          <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <span style="color:var(--ps-pink);">✦</span> Assistant dédié
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Modernized Form Section -->
+    <section id="devis" style="padding: 0 20px;">
+      <div class="itb-form-container">
+        <h2>Demander un devis</h2>
+        <form class="checkout-form" onsubmit="return false;">
+          <div class="grid form-grid">
+            <label>Nom
+              <input class="input" type="text" placeholder="Votre nom" required>
+            </label>
+            <label>Email
+              <input class="input" type="email" placeholder="cous@mail.com" required>
+            </label>
+            <label>Téléphone
+              <input class="input" type="tel" placeholder="06.." required>
+            </label>
+            <label>Type d'événement
+              <select class="input">
+                <option>Mariage</option>
+                <option>Anniversaire</option>
+                <option>Événement d'entreprise</option>
+                <option>Autre</option>
+              </select>
+            </label>
+          </div>
+          <label style="margin-top: 20px; display: block;">Message
+            <textarea class="input" rows="4" placeholder="Décrivez votre demande..."></textarea>
+          </label>
+          <button class="btn btn-primary w-full" style="margin-top: 30px;">Envoyer ma demande</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer commun ===== -->
+  <footer class="site-footer">
+    <div class="footer-signature-brand">Palet Sucré</div>
+    <nav class="footer-nav">
+      <a href="#">Mentions légales</a>
+      <a href="#">CGV</a>
+      <a href="#">Contact</a>
+    </nav>
+    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">&copy; <span id="year"></span> Palet Sucré — Paris.</p>
+  </footer>
+
+  <!-- Panier r&eacute;utilis&eacute; -->
+  <div id="cart-overlay" class="cart-overlay" aria-hidden="true">
+    <aside class="cart-panel" role="dialog" aria-labelledby="cart-title">
+      <header class="cart-header">
+        <h2 id="cart-title">Votre panier</h2>
+        <button id="cart-close" class="icon-btn" aria-label="Fermer">&times;</button>
+      </header>
+      <ul id="cart-list" class="cart-list"></ul>
+      <footer class="cart-footer">
+        <div class="cart-total">
+          <strong>Total : <span id="cart-total">0,00 &euro;</span></strong>
+        </div>
+        <a class="btn btn-primary w-full" href="checkout.html">Finaliser ma commande</a>
+      </footer>
+    </aside>
+  </div>
+
+  <script src="scripts/cart.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/atelier.js"></script>
+</body>
+
+</html>

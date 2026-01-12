@@ -1,0 +1,180 @@
+﻿<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Commander un g&acirc;teau &mdash; Palet Sucr&eacute;</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 768px)">
+  <link rel="stylesheet" href="theme-glass.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0b0c0f">
+  <style>
+    /* Inline styles for Shop Categories to avoid editing global CSS for now */
+    .shop-categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    .cat-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      padding: 8px 20px;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .cat-pill:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .cat-pill.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body class="shop-bg">
+  <header class="site-header bubbled ps-glass-nav">
+    <a class="brand" href="home.html">
+      <img class="brand-mark" src="assets/logo-ps.png" alt="Palet Sucr&eacute;" />
+      <span class="brand-name">Palet Sucr&eacute;</span>
+    </a>
+    <nav class="nav" id="site-nav">
+      <a href="home.html">Accueil</a>
+      <a href="shop.html" class="active">Commander un g&acirc;teau</a>
+      <a href="shop-materiel.html">Shop</a>
+      <a href="inthebox.html">In The Box</a>
+      <a href="atelier.html">L'Atelier</a>
+
+    </nav>
+    <button id="open-cart" class="cart-btn" aria-label="Panier">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main class="section">
+
+    <!-- LEVEL 1: CATEGORY SELECTION (Default View) -->
+    <section id="category-view" class="view-section">
+      <header class="shop-header">
+        <span class="shop-subtitle">Nos Univers</span>
+        <h1 class="display">Choisissez votre envie</h1>
+        <div class="separator-silver"></div>
+      </header>
+      <!-- Grid for Categories -->
+      <div id="category-grid" class="grid cards" style="margin-top: 40px;"></div>
+    </section>
+
+    <!-- LEVEL 2: PRODUCT SELECTION (Hidden by default) -->
+    <section id="product-view" class="view-section hidden" style="display: none;">
+      <div class="view-nav" style="max-width: 1200px; margin: 0 auto 20px auto; padding: 0 20px;">
+        <button id="back-to-cats" class="btn-text">
+          &larr; Retour aux catégories
+        </button>
+      </div>
+
+      <header class="shop-header">
+        <span class="shop-subtitle" id="selected-cat-subtitle">Catégorie</span>
+        <h1 class="display" id="selected-cat-title">Titre</h1>
+        <div class="separator-silver"></div>
+
+        <div class="shop-search-wrapper">
+          <div class="search-glass">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="search-icon">
+              <path
+                d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <input id="q" class="shop-search-input" placeholder="Rechercher dans cette catégorie..." />
+          </div>
+        </div>
+      </header>
+
+      <!-- Grid for Products -->
+      <div id="shop-grid" class="grid cards"></div>
+    </section>
+
+    <div id="product-overlay" class="cart-overlay" aria-hidden="true">
+      <aside class="product-panel" role="dialog" aria-labelledby="product-title">
+        <button class="icon-btn product-close" aria-label="Fermer">&times;</button>
+        <div class="product-body">
+          <div class="product-media">
+            <img id="product-image" alt="">
+          </div>
+          <div class="product-info">
+            <h2 id="product-title"></h2>
+            <p id="product-desc" class="sub"></p>
+            <div class="servings">
+              <label for="servings-select">Nombre de parts</label>
+              <select id="servings-select" class="input" style="max-width:220px"></select>
+            </div>
+            <div class="price-row" style="margin-top:10px">
+              <strong id="product-price"></strong>
+              <button id="product-add" class="btn btn-primary add-to-cart">Ajouter au panier</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="section-separator reveal"></div>
+
+  <footer class="site-footer">
+    <div class="footer-signature-brand">Palet Sucré</div>
+    <nav class="footer-nav">
+      <a href="#">Mentions légales</a>
+      <a href="#">CGV</a>
+      <a href="#">Contact</a>
+    </nav>
+    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">&copy; <span id="year"></span> Palet Sucré — Paris.</p>
+  </footer>
+
+  <div id="cart-overlay" class="cart-overlay" aria-hidden="true">
+    <aside class="cart-panel" role="dialog" aria-labelledby="cart-title">
+      <header class="cart-header">
+        <h2 id="cart-title">Votre panier</h2>
+        <button id="cart-close" class="icon-btn" aria-label="Fermer">&times;</button>
+      </header>
+      <ul id="cart-list" class="cart-list"></ul>
+      <footer class="cart-footer">
+        <div class="cart-total">
+          <strong>Total : <span id="cart-total">0,00 &euro;</span></strong>
+        </div>
+        <a class="btn btn-primary w-full" href="checkout.html">Finaliser ma commande</a>
+      </footer>
+    </aside>
+  </div>
+
+  <script src="scripts/cart.js"></script>
+  <script src="scripts/shop.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>

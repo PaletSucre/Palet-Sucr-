@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Palet Sucré &mdash; Gâteaux d’exception</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<!-- CSS DESKTOP (toujours chargé) -->
+<link rel="stylesheet" href="styles.css">
+
+<!-- CSS MOBILE (seulement sur petit écran) -->
+<link rel="stylesheet" href="mobile.css" media="(max-width: 768px)">
+
+<link rel="stylesheet" href="theme-glass.css"> <!-- AJOUT -->
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0b0c0f">
+</head>
+<body>
+  <!-- INTRO AVANT D'ENTRER SUR LE SITE (NOUVEAU) -->
+  <div id="intro-overlay">
+    <div class="intro-bg-glow"></div>
+
+    <div class="intro-content">
+      <div class="intro-mask-wrapper">
+        <!-- Ton logo -->
+        <img src="assets/logo-ps.png" alt="Palet Sucré" class="intro-mask" />
+      </div>
+
+      <h1 class="intro-title">Palet Sucré</h1>
+      <p class="intro-subtitle">
+        Entrez dans l'univers masqué de la pâtisserie de luxe.
+      </p>
+
+      <button id="enter-button" class="intro-button">
+        Entrer sur le site
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENU NORMAL DU SITE (TON CODE EXISTANT, JUSTE ENROBÉ) -->
+  <div id="site-content">
+    <header class="site-header bubbled ps-glass-nav">
+      <a class="brand" href="home.html">
+        <img class="brand-mark" src="assets/logo-ps.png" alt="Palet Sucré"/>
+        <span class="brand-name">Palet Sucré</span>
+      </a>
+
+      <nav class="nav" id="site-nav">
+        <a href="home.html">Accueil</a>
+        <a href="shop.html">Commander un gâteau</a>
+        <a href="shop-materiel.html">Shop</a>
+        <a href="inthebox.html">In The Box</a>
+        <a href="atelier.html">L'Atelier</a>
+        <button id="open-cart" class="cart-btn">Panier 
+          <span id="cart-count" class="badge">0</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero ps-hero-glass">
+        <div class="hero-line left" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <h1 class="display">
+            L'élégance <span class="accent-glow">noir &amp; néon</span><br>au service du goût
+          </h1>
+          <p class="lead">
+            Des gâteaux d'exception, une finition studio, une expérience premium. Commande en ligne ou sur-mesure.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="shop.html">Commander</a>
+            <a class="btn btn-ghost" href="#featured">Voir nos signatures</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <img src="assets/hero-cake.jpg" alt="">
+        </div>
+      </section>
+
+      <section class="section ps-glass-section" id="featured">
+        <div class="section-head">
+          <h2>Signatures de la maison</h2>
+          <a class="link" href="shop.html">Tout voir &rarr;</a>
+        </div>
+        <div class="grid cards">
+          <article class="card ps-glass-card">
+            <img src="assets/raffaello.jpg" alt="Raffaello Framboise" loading="lazy">
+            <div class="card-body">
+              <h3>Raffaello Framboise</h3>
+              <p>Velours coco, cœur framboise, mousse chocolat blanc.</p>
+              <div class="price-row">
+                <span class="price">29,90&nbsp;€</span>
+                <button class="btn btn-small add-to-cart"
+                        data-id="ps-raffaello"
+                        data-name="Raffaello Framboise"
+                        data-price="29.90"
+                        data-image="assets/raffaello.jpg">
+                  Ajouter
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card ps-glass-card">
+            <img src="assets/pistache.jpg" alt="Pistache Rubis" loading="lazy">
+            <div class="card-body">
+              <h3>Pistache Rubis</h3>
+              <p>Praliné pistache, croustillant rubis, pochage élégant.</p>
+              <div class="price-row">
+                <span class="price">32,00&nbsp;€</span>
+                <button class="btn btn-small add-to-cart"
+                        data-id="ps-pistache"
+                        data-name="Pistache Rubis"
+                        data-price="32.00"
+                        data-image="assets/pistache.jpg">
+                  Ajouter
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card ps-glass-card">
+            <img src="assets/choco.jpg" alt="Chocolat Obscura" loading="lazy">
+            <div class="card-body">
+              <h3>Chocolat Obscura</h3>
+              <p>70% grand cru, glaçage miroir, notes de cassis.</p>
+              <div class="price-row">
+                <span class="price">34,00&nbsp;€</span>
+                <button class="btn btn-small add-to-cart"
+                        data-id="ps-obscura"
+                        data-name="Chocolat Obscura"
+                        data-price="34.00"
+                        data-image="assets/choco.jpg">
+                  Ajouter
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year"></span> Palet Sucré &mdash; Tous droits réservés.</p>
+      <nav class="footer-nav">
+        <a href="#">Mentions légales</a>
+        <a href="#">CGV</a>
+        <a href="#">Contact</a>
+      </nav>
+    </footer>
+
+    <!-- Panier -->
+    <div id="cart-overlay" class="cart-overlay" aria-hidden="true">
+      <aside class="cart-panel" role="dialog" aria-labelledby="cart-title">
+        <header class="cart-header">
+          <h2 id="cart-title">Votre panier</h2>
+          <button id="cart-close" class="icon-btn" aria-label="Fermer">&times;</button>
+        </header>
+        <ul id="cart-list" class="cart-list"></ul>
+        <footer class="cart-footer">
+          <div class="cart-total">
+            Total: <strong><span id="cart-total">0,00&nbsp;€</span></strong>
+          </div>
+          <a class="btn btn-primary w-full" href="shop.html#checkout">Finaliser la commande</a>
+        </footer>
+      </aside>
+    </div>
+  </div> <!-- fin #site-content -->
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const body = document.body;
+    const introOverlay = document.getElementById("intro-overlay");
+    const enterButton = document.getElementById("enter-button");
+
+    // Vérifie si l'intro a déjà été vue
+    const introSeen = localStorage.getItem("introSeen");
+
+    if (!introSeen) {
+      // Montrer l'intro
+      body.classList.add("no-scroll");
+
+      const closeIntro = () => {
+        introOverlay.classList.add("intro-hide");
+        body.classList.remove("no-scroll");
+
+        // On mémorise que l'intro a été vue
+        localStorage.setItem("introSeen", "true");
+      };
+
+      enterButton.addEventListener("click", closeIntro);
+
+      // Option : fermeture auto
+      // setTimeout(closeIntro, 4000);
+
+    } else {
+      // Si l'intro a déjà été vue -> on la retire immédiatement
+      introOverlay.style.display = "none";
+    }
+  });
+</script>
+
+  <!-- Tes scripts existants -->
+  <script src="scripts/cart.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

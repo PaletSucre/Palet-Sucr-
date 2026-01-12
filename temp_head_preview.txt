@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Palet Sucr&eacute;Gǽteaux d�?Texception</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0b0c0f">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-pill">
+    <a class="brand" href="index.html">
+      <img class="brand-mark" src="assets/logo-ps.png" alt="Palet Sucr&eacute;<span class="brand-name">Palet Sucr&eacute;</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Accueil</a>
+      <a href="#about">�? propos</a>
+      <a href="shop.html" class="bubble">Shop</a>
+      <a href="#in-the-box" class="accent">In The Box</a>
+      <button id="open-cart" class="cart-btn" aria-label="Ouvrir le panier">
+      <span>Panier</span><span id="cart-count" class="badge">0</span>
+      </button>
+    </nav>
+    </div>
+  </header>
+
