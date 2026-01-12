@@ -90,10 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (target) target.classList.add('active');
 });
 
-// Retire la recherche sur la page Commander un gÃ¢teau (shop.html)
+// Retire la recherche sur la page Commander un gÃ¢teau (index.html)
 document.addEventListener('DOMContentLoaded', () => {
   const path = (location.pathname.split('/').pop() || '').toLowerCase();
-  if (path === 'shop.html') {
+  if (path === 'index.html') {
     const filters = document.querySelector('.section-head .filters');
     if (filters) filters.remove();
   }
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const list = drawer.querySelector('.drawer-nav');
   list.innerHTML = '';
   // Ordre souhaitÃ© pour le menu mobile: Accueil, Shop, Commander, In The Box, Atelier
-  const order = ['home.html', 'shop-materiel.html', 'shop.html', 'inthebox.html', 'atelier.html'];
+  const order = ['home.html', 'shop-materiel.html', 'index.html', 'inthebox.html', 'atelier.html'];
   const links = Array.from(sourceNav.querySelectorAll('a'));
   // Ajoute dans l'ordre souhaitÃ© si disponibles
   order.forEach(key => {
